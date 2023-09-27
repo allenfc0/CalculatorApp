@@ -107,6 +107,31 @@ public class Calculator implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        handleNumberFunctions(e);
+
+        handleDecimalFunctions(e);
+
+        handleAdditionFunctions(e);
+
+        handleSubtractionFunctions(e);
+
+        handleMultiplicationFunctions(e);
+
+        handleDivisionFunctions(e);
+
+        handleEqualFunctions(e);
+
+        handleClearFunctions(e);
+
+        handleDeleteFunctions(e);
+
+        handleNegativeFunctions(e);
+
+
+    }
+
+
+    private void handleNumberFunctions(ActionEvent e) {
         for(int i = 0; i < 10; i++) {
             if(e.getSource() == numberButtons[i]) {
                 if(textField.getText().equals("0")) {
@@ -115,6 +140,9 @@ public class Calculator implements ActionListener {
                 textField.setText(textField.getText().concat(String.valueOf(i)));
             }
         }
+    }
+
+    private void handleDecimalFunctions(ActionEvent e) {
         if(e.getSource() == decButton && !textField.getText().contains(".")) {
             if(textField.getText().length() == 0) {
                 textField.setText("0.");
@@ -122,31 +150,41 @@ public class Calculator implements ActionListener {
                 textField.setText(textField.getText().concat("."));
             }
         }
+    }
 
+    private void handleAdditionFunctions(ActionEvent e) {
         if(e.getSource() == addButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '+';
             textField.setText("");
         }
+    }
 
+    private void handleSubtractionFunctions(ActionEvent e) {
         if(e.getSource() == subButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '-';
             textField.setText("");
         }
+    }
 
+    private void handleMultiplicationFunctions(ActionEvent e) {
         if(e.getSource() == mulButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '*';
             textField.setText("");
         }
+    }
 
+    private void handleDivisionFunctions(ActionEvent e) {
         if(e.getSource() == divButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '/';
             textField.setText("");
         }
+    }
 
+    private void handleEqualFunctions(ActionEvent e) {
         if(e.getSource() == equButton) {
             num2 = Double.parseDouble(textField.getText());
 
@@ -168,11 +206,15 @@ public class Calculator implements ActionListener {
             textField.setText(String.valueOf(result));
             num1 = result;
         }
+    }
 
+    private void handleClearFunctions(ActionEvent e) {
         if(e.getSource() == clrButton) {
             textField.setText("");
         }
+    }
 
+    private void handleDeleteFunctions(ActionEvent e) {
         if(e.getSource() == delButton) {
             String string = textField.getText();
             textField.setText("");
@@ -181,7 +223,9 @@ public class Calculator implements ActionListener {
             }
 
         }
+    }
 
+    private void handleNegativeFunctions(ActionEvent e) {
         if(e.getSource() == negButton) {
             Double temp = Double.parseDouble(textField.getText());
             temp *= -1;
