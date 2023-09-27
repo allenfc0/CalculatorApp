@@ -19,6 +19,9 @@ public class Calculator implements ActionListener {
     private char operator;
 
     public Calculator() {
+
+
+
         frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 550);
@@ -130,13 +133,16 @@ public class Calculator implements ActionListener {
 
     }
 
-
+    /*
+     * Description: Handler methods to improve code quality
+     */
     private void handleNumberFunctions(ActionEvent e) {
         for(int i = 0; i < 10; i++) {
             if(e.getSource() == numberButtons[i]) {
-                if(textField.getText().equals("0")) {
+                if(textField.getText().equals("0") || result != 0) {
                     textField.setText("");
                 }
+
                 textField.setText(textField.getText().concat(String.valueOf(i)));
             }
         }
@@ -154,7 +160,7 @@ public class Calculator implements ActionListener {
 
     private void handleAdditionFunctions(ActionEvent e) {
         if(e.getSource() == addButton) {
-            num1 = Double.parseDouble(textField.getText());
+            num1 += Double.parseDouble(textField.getText());
             operator = '+';
             textField.setText("");
         }
@@ -162,7 +168,7 @@ public class Calculator implements ActionListener {
 
     private void handleSubtractionFunctions(ActionEvent e) {
         if(e.getSource() == subButton) {
-            num1 = Double.parseDouble(textField.getText());
+            num1 -= Double.parseDouble(textField.getText());
             operator = '-';
             textField.setText("");
         }
@@ -170,7 +176,7 @@ public class Calculator implements ActionListener {
 
     private void handleMultiplicationFunctions(ActionEvent e) {
         if(e.getSource() == mulButton) {
-            num1 = Double.parseDouble(textField.getText());
+            num1 *= Double.parseDouble(textField.getText());
             operator = '*';
             textField.setText("");
         }
@@ -178,16 +184,19 @@ public class Calculator implements ActionListener {
 
     private void handleDivisionFunctions(ActionEvent e) {
         if(e.getSource() == divButton) {
-            num1 = Double.parseDouble(textField.getText());
+            num1 /= Double.parseDouble(textField.getText());
             operator = '/';
             textField.setText("");
         }
     }
 
-    private void handleEqualFunctions(ActionEvent e) {
+    private void handleEqualFunctions(ActionEvent e) throws NumberFormatException {
         if(e.getSource() == equButton) {
-            num2 = Double.parseDouble(textField.getText());
-
+            try {
+                num2 = Double.parseDouble(textField.getText());
+            } catch (NumberFormatException exception) {
+                System.out.println(exception.getMessage());
+            }
             switch(operator) {
                 case '+' :
                     result = num1 + num2;
@@ -201,10 +210,15 @@ public class Calculator implements ActionListener {
                 case '/' :
                     result = num1 / num2;
                     break;
+                default:
+                    //textField.setText(textField.getText());
+
             }
 
             textField.setText(String.valueOf(result));
-            num1 = result;
+            num1 = 0;
+            num2 = 0;
+            operator = '~';
         }
     }
 
