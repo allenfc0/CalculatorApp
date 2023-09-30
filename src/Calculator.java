@@ -22,10 +22,11 @@ public class Calculator implements ActionListener {
 
 
 
-        frame = new JFrame("Calculator");
+        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 550);
         frame.setLayout(null);
+        frame.setTitle("Calculator");
 
         textField = new JTextField();
         textField.setBounds(50, 25, 300, 50);
@@ -160,23 +161,45 @@ public class Calculator implements ActionListener {
 
     private void handleAdditionFunctions(ActionEvent e) {
         if(e.getSource() == addButton) {
-            num1 += Double.parseDouble(textField.getText());
+            if(num1 == 0) {
+                num1 = Double.parseDouble(textField.getText());
+            } else {
+                num1 += Double.parseDouble(textField.getText());
+            }
+
             operator = '+';
             textField.setText("");
+
+            System.out.println("num1: " + num1);
+            System.out.println("num2: " + num2);
+            System.out.println("result: " + result);
+            System.out.println("operator: " + operator);
         }
     }
 
     private void handleSubtractionFunctions(ActionEvent e) {
         if(e.getSource() == subButton) {
-            num1 -= Double.parseDouble(textField.getText());
+
+            if(num1 == 0) {
+                num1 = Double.parseDouble(textField.getText());
+
+            } else {
+                num1 -= Double.parseDouble(textField.getText());
+            }
+
             operator = '-';
             textField.setText("");
+
+            System.out.println("num1: " + num1);
+            System.out.println("num2: " + num2);
+            System.out.println("result: " + result);
+            System.out.println("operator: " + operator);
         }
     }
 
     private void handleMultiplicationFunctions(ActionEvent e) {
         if(e.getSource() == mulButton) {
-            num1 *= Double.parseDouble(textField.getText());
+            num1 = Double.parseDouble(textField.getText());
             operator = '*';
             textField.setText("");
         }
@@ -184,7 +207,7 @@ public class Calculator implements ActionListener {
 
     private void handleDivisionFunctions(ActionEvent e) {
         if(e.getSource() == divButton) {
-            num1 /= Double.parseDouble(textField.getText());
+            num1 = Double.parseDouble(textField.getText());
             operator = '/';
             textField.setText("");
         }
@@ -215,17 +238,39 @@ public class Calculator implements ActionListener {
 
             }
 
+            System.out.println("Equal");
+
+            System.out.println("num1: " + num1);
+            System.out.println("num2: " + num2);
+            System.out.println("result: " + result);
+            System.out.println("operator: " + operator);
+
             textField.setText(String.valueOf(result));
             num1 = 0;
+            //operator = '~';
             num2 = 0;
-            operator = '~';
+            result = 0;
+
+            System.out.println("num1: " + num1);
+            System.out.println("num2: " + num2);
+            System.out.println("result: " + result);
+            System.out.println("operator: " + operator);
+
         }
     }
 
     private void handleClearFunctions(ActionEvent e) {
         if(e.getSource() == clrButton) {
             textField.setText("");
+            num1 = 0;
+            num2 = 0;
+            result = 0;
         }
+
+        System.out.println("num1: " + num1);
+        System.out.println("num2: " + num2);
+        System.out.println("result: " + result);
+        System.out.println("operator: " + operator);
     }
 
     private void handleDeleteFunctions(ActionEvent e) {
